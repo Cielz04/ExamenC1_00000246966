@@ -65,11 +65,19 @@ class MainActivity : AppCompatActivity() {
                 contador++
 
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
+                val tvErrores = findViewById<TextView>(R.id.tvErrores)
+                tvErrores.setText("Ingrese 3 productos")
             }
         }
 
         btnCalcular.setOnClickListener {
+
+            if (tvP1Precio.text.isEmpty() || tvP2Precio.text.isEmpty() || tvP3Precio.text.isEmpty()) {
+                val tvErrores = findViewById<TextView>(R.id.tvErrores)
+                tvErrores.text = "Por favor, ingrese todos los productos."
+                return@setOnClickListener // No continuar con el cálculo
+            }
+
             val tvP1Precio = findViewById<TextView>(R.id.tvP1Precio)
             val tvP2Precio = findViewById<TextView>(R.id.tvP2Precio)
             val tvP3Precio = findViewById<TextView>(R.id.tvP3Precio)
@@ -89,7 +97,8 @@ class MainActivity : AppCompatActivity() {
                 tvTotal.text = total.toString()
 
             } catch (e: Exception) {
-                e.printStackTrace()
+                val tvErrores = findViewById<TextView>(R.id.tvErrores)
+                tvErrores.setText("Ingrese 3 productos")
             }
         }
 
